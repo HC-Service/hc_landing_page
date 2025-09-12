@@ -1,11 +1,3 @@
-/**
-* Template Name: iLanding
-* Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
-* Updated: Nov 12 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
 # Font & Color Variables
 # Help: https://bootstrapmade.com/color-system/
@@ -723,16 +715,27 @@ section,
     position: relative;
 }
 
+.section-title p {
+    margin-bottom: 0;
+    font-size: 1.15rem;
+}
+
 @media (max-width: 992px) {
     /* 태블릿 */
     .section-title h2 {
         font-size: 2.3rem; /* 화면이 작아지면 글자 작게 */
+    }
+    .section-title p {
+        font-size: 1.1rem;
     }
 }
 
 @media (max-width: 576px) {
     .section-title h2 {
         font-size: 2rem; /* 화면이 작아지면 글자 작게 */
+    }
+    .section-title p {
+        font-size: 1.05rem;
     }
 }
 
@@ -747,10 +750,6 @@ section,
     right: 0;
     bottom: 0;
     margin: auto;
-}
-
-.section-title p {
-    margin-bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -955,6 +954,7 @@ section,
 
 .hero .stat-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1rem;
     padding: 2rem;
@@ -990,16 +990,206 @@ section,
 }
 
 .hero .stat-item .stat-content h4 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     margin-bottom: 0.25rem;
     font-weight: 600;
+    text-align: center;
 }
 
 .hero .stat-item .stat-content p {
     font-size: 0.875rem;
     color: color-mix(in srgb, var(--default-color), transparent 40%);
     margin: 0;
+    text-align: center;
 }
+
+/*--------------------------------------------------------------
+# award start
+--------------------------------------------------------------*/
+
+/* 스킨 전용 토큰 */
+.stat-item.stat--v2 {
+    --primary: var(--accent-color, #2a6ef2);
+    --text: var(--default-color, #1f2937);
+    --muted: #6b7280;
+    --ring: rgba(31, 41, 55, 0.18);
+    --card-bg: #ffffff;
+}
+
+/* 카드 스타일 */
+.stat-item.stat--v2 {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--ring);
+    border-radius: 14px;
+    background: var(--card-bg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.stat-item.stat--v2:hover {
+    transform: translateY(-2px);
+    border-color: rgba(42, 110, 242, 0.35);
+    box-shadow: 0 10px 15px -12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* 아이콘 */
+.stat-item.stat--v2 .stat-icon {
+    flex: 0 0 48px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    background: #eef2ff; /* fallback */
+}
+@supports (color: color-mix(in srgb, black, white)) {
+    .stat-item.stat--v2 .stat-icon {
+        background: color-mix(in srgb, var(--primary), white 85%);
+    }
+}
+.stat-item.stat--v2 .stat-icon i {
+    font-size: 1.25rem;
+}
+
+/* 콘텐츠 */
+.stat-item.stat--v2 .stat-content {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+/* 제목/수치 */
+.stat-item.stat--v2 .stat-content h4 {
+    margin: 0;
+    line-height: 1.25;
+    font-weight: 600;
+    color: var(--text);
+    text-align: left;
+    font-size: clamp(0.95rem, 0.9rem + 0.2vw, 1.05rem);
+}
+
+/* 두 번째 h4(수치 강조) - <br> 있어도 동작 */
+.stat-item.stat--v2 .stat-content h4:nth-of-type(2) {
+    margin-top: 0.15rem;
+    font-weight: 800;
+    color: var(--primary);
+    font-size: clamp(1.05rem, 0.95rem + 0.8vw, 1.35rem);
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+}
+
+/* 설명 */
+.stat-item.stat--v2 .stat-content p {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-align: left;
+}
+
+/* <br>로 생기는 여백 제거(이 스킨 내부에서만) */
+.stat-item.stat--v2 .stat-content br {
+    display: none;
+}
+
+/* 모바일 중앙 정렬 */
+@media (max-width: 600px) {
+    .stat-item.stat--v2 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .stat-item.stat--v2 .stat-content h4,
+    .stat-item.stat--v2 .stat-content p {
+        text-align: center;
+    }
+}
+
+/* 모션 최소화 존중 */
+@media (prefers-reduced-motion: reduce) {
+    .stat-item.stat--v2,
+    .stat-item.stat--v2:hover {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* 글라스 스킨: .hero 내부의 .stats-row 중 stats-row--glass에만 적용 */
+.hero .stats-row.stats-row--glass {
+    position: relative;
+    z-index: 1;
+    margin-top: 5rem;
+    border-radius: 20px;
+    overflow: hidden; /* 내부 효과 깔끔히 클리핑 */
+    /* 기본 배경(fallback) */
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    padding-bottom: 2rem;
+    backdrop-filter: saturate(120%) blur(12px);
+    -webkit-backdrop-filter: saturate(120%) blur(12px);
+}
+
+/* color-mix 지원 시, 테마 변수와 어우러지는 유리 느낌 */
+@supports (color: color-mix(in srgb, black, white)) {
+    .hero .stats-row.stats-row--glass {
+        background: color-mix(in srgb, var(--surface-color, #ffffff), transparent 45%);
+        border-color: color-mix(in srgb, #ffffff, transparent 65%);
+        box-shadow: 0 12px 28px color-mix(in srgb, var(--default-color, #1f2937), transparent 90%),
+            0 2px 8px color-mix(in srgb, var(--default-color, #1f2937), transparent 92%);
+    }
+}
+
+/* 상단 하이라이트와 은은한 테마 광택 */
+.hero .stats-row.stats-row--glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    /* 상단 라이트 + 테마 컬러 광택 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.45), transparent 35%),
+        radial-gradient(80rem 30rem at 10% -10%, color-mix(in srgb, var(--accent-color, #2a6ef2), transparent 90%), transparent 60%);
+    mix-blend-mode: soft-light;
+    opacity: 0.9;
+}
+
+/* Safari/구형 브라우저에서 블러 미지원 시 보다 불투명하게 */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .hero .stats-row.stats-row--glass {
+        background: color-mix(in srgb, var(--surface-color, #ffffff), transparent 15%);
+        border-color: color-mix(in srgb, #ffffff, transparent 40%);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* 호버 시 아주 살짝 리프트감 (터치에서는 영향 적음) */
+.hero .stats-row.stats-row--glass:hover {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* 모션 최소화 설정 존중 */
+@media (prefers-reduced-motion: reduce) {
+    .hero .stats-row.stats-row--glass {
+        transition: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+/* 다크 톤 환경에서 경계선/배경 대비 보정(옵션) */
+@media (prefers-color-scheme: dark) {
+    .hero .stats-row.stats-row--glass {
+        background: color-mix(in srgb, var(--surface-color, #0b0f16), transparent 35%);
+        border-color: color-mix(in srgb, #ffffff, transparent 80%);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), 0 2px 10px rgba(0, 0, 0, 0.25);
+    }
+}
+/*--------------------------------------------------------------
+# award css end
+--------------------------------------------------------------*/
 
 @media (max-width: 575px) {
     .hero .stat-item {
@@ -1098,8 +1288,8 @@ section,
 }
 
 .about .profile .profile-image {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -1244,6 +1434,10 @@ section,
 /*--------------------------------------------------------------
 # Features Section
 --------------------------------------------------------------*/
+.features .section-title {
+    padding-bottom: 40px;
+}
+
 .features .nav-tabs {
     border: 0;
     background-color: color-mix(in srgb, var(--default-color), transparent 96%);
@@ -1322,7 +1516,7 @@ section,
 }
 
 .features .nav-link h4 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     margin: 0;
 }
@@ -1342,6 +1536,18 @@ section,
 
 .features .nav-link.active h4 {
     color: var(--contrast-color);
+}
+
+@media (max-width: 992px) {
+    .features .nav-link h4 {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .features .nav-link h4 {
+        font-size: 1.05rem;
+    }
 }
 
 .features .tab-content {
@@ -2648,7 +2854,7 @@ section,
         font-size: 1.2rem; /* 24px */
     }
     .service-detail-text {
-        font-size: 0.9remrem; /* 16px */
+        font-size: 0.95rem; /* 16px */
         margin-bottom: 1.2rem; /* 모바일에서는 여백 조금 줄임 */
     }
     .service-detail-check-text {
@@ -2662,7 +2868,7 @@ section,
         font-size: 1.1rem; /* 20px */
     }
     .service-detail-text {
-        font-size: 0.8rem; /* 14.4px */
+        font-size: 0.9rem; /* 14.4px */
         margin-bottom: 1rem; /* 모바일에서는 여백 조금 줄임 */
     }
     .service-detail-check-text {

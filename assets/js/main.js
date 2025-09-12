@@ -1,228 +1,7 @@
-/**
-* Template Name: iLanding
-* Template URL: https://bootstrapmade.com/ilanding-bootstrap-landing-page-template/
-* Updated: Nov 12 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 (function () {
   "use strict";
 
-  /**
-   * Apply .scrolled class to the body as the page is scrolled down
-   */
-  function toggleScrolled() {
-    const selectBody = document.querySelector('body');
-    const selectHeader = document.querySelector('#header');
-    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
-    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
-  }
-
-  document.addEventListener('scroll', toggleScrolled);
-  window.addEventListener('load', toggleScrolled);
-
-  /**
-   * Mobile nav toggle
-   */
-  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
-
-  function mobileNavToogle() {
-    document.querySelector('body').classList.toggle('mobile-nav-active');
-    mobileNavToggleBtn.classList.toggle('bi-list');
-    mobileNavToggleBtn.classList.toggle('bi-x');
-  }
-  if (mobileNavToggleBtn) {
-    mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
-  }
-
-  /**
-   * Hide mobile nav on same-page/hash links
-   */
-  document.querySelectorAll('#navmenu a').forEach(navmenu => {
-    navmenu.addEventListener('click', () => {
-      if (document.querySelector('.mobile-nav-active')) {
-        mobileNavToogle();
-      }
-    });
-
-  });
-
-  /**
-   * Toggle mobile nav dropdowns
-   */
-  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
-    navmenu.addEventListener('click', function (e) {
-      e.preventDefault();
-      this.parentNode.classList.toggle('active');
-      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
-      e.stopImmediatePropagation();
-    });
-  });
-
-  /**
-   * Scroll top button
-   */
-  let scrollTop = document.querySelector('.scroll-top');
-
-  function toggleScrollTop() {
-    if (scrollTop) {
-      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
-    }
-  }
-  scrollTop.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  window.addEventListener('load', toggleScrollTop);
-  document.addEventListener('scroll', toggleScrollTop);
-
-  /**
-   * Animation on scroll function and init
-   */
-  function aosInit() {
-    AOS.init({
-      duration: 600,
-      easing: 'ease-in-out',
-      once: true,
-      mirror: false
-    });
-  }
-  window.addEventListener('load', aosInit);
-
-  /**
-   * Initiate glightbox
-   */
-  const glightbox = GLightbox({
-    selector: '.glightbox'
-  });
-
-  /**
-   * Init swiper sliders
-   */
-  function initSwiper() {
-    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
-      let config = JSON.parse(
-        swiperElement.querySelector(".swiper-config").innerHTML.trim()
-      );
-
-      if (swiperElement.classList.contains("swiper-tab")) {
-        initSwiperWithCustomPagination(swiperElement, config);
-      } else {
-        new Swiper(swiperElement, config);
-      }
-    });
-  }
-
-  window.addEventListener("load", initSwiper);
-
-  /**
-   * Initiate Pure Counter
-   */
-  new PureCounter();
-
-  /**
-   * Frequently Asked Questions Toggle
-   */
-  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
-    faqItem.addEventListener('click', () => {
-      faqItem.parentNode.classList.toggle('faq-active');
-    });
-  });
-
-  /**
-   * Correct scrolling position upon page load for URLs containing hash links.
-   */
-  window.addEventListener('load', function (e) {
-    if (window.location.hash) {
-      if (document.querySelector(window.location.hash)) {
-        setTimeout(() => {
-          let section = document.querySelector(window.location.hash);
-          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
-          window.scrollTo({
-            top: section.offsetTop - parseInt(scrollMarginTop),
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
-    }
-  });
-
-  /**
-   * Navmenu Scrollspy
-   */
-  let navmenulinks = document.querySelectorAll('.navmenu a');
-
-  function navmenuScrollspy() {
-    navmenulinks.forEach(navmenulink => {
-      if (!navmenulink.hash) return;
-      let section = document.querySelector(navmenulink.hash);
-      if (!section) return;
-      let position = window.scrollY + 200;
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
-        navmenulink.classList.add('active');
-      } else {
-        navmenulink.classList.remove('active');
-      }
-    })
-  }
-  window.addEventListener('load', navmenuScrollspy);
-  document.addEventListener('scroll', navmenuScrollspy);
-
-  /**
-   * Service Details hash 기반 콘텐츠 전환
-   */
-  const contents = {
-    "#A": { templateId: "template-A", title: "시니어 헬스케어 사이니지" },
-    "#B": { templateId: "template-B", title: "장기요양기관 등하원 관리" },
-    "#C": { templateId: "template-C", title: "(벨루스) 핸디형 피부·두피 진단" },
-    "#D": { templateId: "template-D", title: "(아나젠) 두피·모발 진단" }
-  };
-
-  function renderContent() {
-    const hash = window.location.hash || "#A";
-    const data = contents[hash];
-    const container = document.getElementById("dynamic-content");
-    container.textContent = "";
-
-    if (data?.templateId) {
-      const template = document.getElementById(data.templateId);
-      if (template) {
-        container.appendChild(template.content.cloneNode(true));
-      }
-    }
-  }
-
-  function updateActiveLink() {
-    const hash = window.location.hash || "#A";
-    document.querySelectorAll(".services-list a").forEach(link => {
-      link.classList.toggle("active", link.getAttribute("href") === hash);
-    });
-  }
-
-  function updatePageTitle() {
-    const hash = window.location.hash || "#A";
-    const titleElement = document.getElementById("page-title");
-    titleElement.textContent = contents[hash]?.title || "Service Details";
-  }
-
-  function handleHashChange() {
-    renderContent();
-    updateActiveLink();
-    updatePageTitle();
-  }
-
-  window.addEventListener("DOMContentLoaded", handleHashChange);
-  window.addEventListener("hashchange", handleHashChange);
-})();
-
-(function () {
-  translations = {
+  const translations = {
     "text-hero-title": {
       "ko": "헬스클라우드(주)",
       "en": "HealthCloud Inc."
@@ -448,8 +227,8 @@
       "en": "Phone Number"
     },
     "text-contact-phone-number": {
-      "ko": "+82 33-1522-8930\n(평일 09:00 – 18:00)",
-      "en": "+82 33-1522-8930\n(Weekdays 09:00 – 18:00)"
+      "ko": `033-1522-8930 (평일 09:00 – 18:00)`,
+      "en": "+82 33-1522-8930 (Weekdays 09:00 – 18:00)"
     },
     "text-contact-email-title": {
       "ko": "Email Address",
@@ -458,15 +237,503 @@
     "text-contact-email-address": {
       "ko": "sjyu@h-cloud.co.kr",
       "en": "sjyu@h-cloud.co.kr"
+    },
+    "carousel-prev": {
+      "ko": "이전",
+      "en": "Previous"
+    },
+    "carousel-next": {
+      "ko": "다음",
+      "en": "Next"
+    },
+    "service-a-title": {
+      "ko": "시니어 헬스케어 사이니지(건강·인지)",
+      "en": "Senior Healthcare Signage (Health & Cognition)"
+    },
+    "service-a-description": {
+      "ko": "시니어 헬스케어 사이니지는 고령자의 건강한 노후 생활을 지원하기 위한 과학적인 맞춤형 솔루션입니다. AI 기술과 사이니지 기기를 활용하여 인지 기능과 신체 능력을 체계적으로 진단하고 개선할 수 있는 프로그램을 제공합니다.",
+      "en": "Senior healthcare signage is a scientific, personalized solution to support healthy aging. Using AI technology and signage devices, it systematically diagnoses and improves cognitive and physical functions."
+    },
+    "service-a-check1-title": {
+      "ko": "인지 능력 진단",
+      "en": "Cognitive Ability Assessment"
+    },
+    "service-a-check1-text": {
+      "ko": "설문 기반 검사: MMSE-DS, CIST 등 과학적 문진 도구를 활용하여 인지 상태를 평가합니다. 행동 기반 분석: COP, SVA, HTS와 같은 행동 패턴 분석 기술을 통해 보다 객관적이고 정밀한 진단이 가능합니다.",
+      "en": "Survey-based tests: Use scientific tools such as MMSE-DS and CIST to evaluate cognitive status. Behavior-based analysis: Technologies like COP, SVA, and HTS enable more objective and precise diagnosis."
+    },
+    "service-a-check2-title": {
+      "ko": "인지 훈련 콘텐츠",
+      "en": "Cognitive Training Content"
+    },
+    "service-a-check2-text": {
+      "ko": "공예, 미술, 지필, 회상, 운동 등 다양한 인지 훈련 동영상 콘텐츠가 탑재되어 있어, 고령자가 쉽게 따라하며 두뇌를 자극할 수 있습니다.",
+      "en": "Includes various training video content such as crafts, art, writing, reminiscence, and exercise, allowing seniors to easily follow and stimulate their brains."
+    },
+    "service-a-check3-title": {
+      "ko": "운동능력 측정 및 맞춤 코칭",
+      "en": "Physical Ability Measurement & Coaching"
+    },
+    "service-a-check3-text": {
+      "ko": "상지, 하지, 전신의 운동능력을 구분 측정하여 점수화된 평가 결과를 제공합니다. 결과를 바탕으로 1주 단위 맞춤형 운동 프로그램이 추천되며, 영상 가이드를 통해 따라 하기 쉽도록 구성되어 있습니다. 실시간 심박수 측정 기능을 통해 운동 중 안전성과 적정 강도를 관리할 수 있습니다.",
+      "en": "Measures upper body, lower body, and overall physical abilities, providing scored evaluations. Based on results, tailored weekly exercise programs are recommended, supported by video guides. Real-time heart rate monitoring ensures safe and proper intensity during exercise."
+    },
+    "service-a-check4-title": {
+      "ko": "기초 신체 기능 평가",
+      "en": "Basic Physical Function Assessment"
+    },
+    "service-a-check4-text": {
+      "ko": "근력, 유연성, 평형성, 지구력 등 고령자의 기초 체력을 평가하고 점수화된 결과와 함께 개선 가이드를 제공합니다. 다양한 동작이 포함되어 있으며, 대상자가 원하는 측정 항목을 선택할 수 있도록 설계되어 개인 맞춤형 평가가 가능합니다.",
+      "en": "Evaluates seniors’ basic physical fitness such as strength, flexibility, balance, and endurance, providing scored results with improvement guidelines. Includes diverse movements and allows individuals to select desired assessments for a personalized evaluation."
+    },
+    "service-a-extra": {
+      "ko": "헬스클라우드의 시니어 헬스케어 사이니지는 고령자의 삶의 질 향상과 건강 수명을 위한 예방 중심의 스마트 헬스케어 솔루션입니다.",
+      "en": "HealthCloud’s senior healthcare signage is a preventive smart healthcare solution to enhance quality of life and extend healthy life expectancy."
+    },
+    "service-b-title": {
+      "ko": "장기요양기관 등하원 관리",
+      "en": "Long-Term Care Facility Pick-Up & Drop-Off Management"
+    },
+    "service-b-description": {
+      "ko": "신뢰할 수 있는 등하원 정보를 관리하기 위한 서비스를 제공합니다. 출석 확인부터 공단 연계 증빙 자료 생성까지 시설 운영의 효율성과 대상 보호자의 신뢰를 높여주는 지능형 솔루션입니다.",
+      "en": "Provides a service to reliably manage pick-up and drop-off information. From attendance verification to generating linked documentation for the national health system, it ensures operational efficiency and guardians’ trust."
+    },
+    "service-b-check-1-title": {
+      "ko": "피보호자 자동 식별 및 출결 관리",
+      "en": "Automatic Identification & Attendance Management"
+    },
+    "service-b-check-1-text": {
+      "ko": "AI 안면 인식을 통한 정확한 출석 확인 및 등·하원 시간, 위치, 이미지를 자동 저장 및 기록합니다. 보호자 전용 알림 기능을 제공합니다.(모바일 앱 기반)",
+      "en": "Automatically records attendance and pick-up/drop-off details using AI facial recognition. Provides guardian-specific notifications via mobile app."
+    },
+    "service-b-check-2-title": {
+      "ko": "요양보호자 케어 정보 기록",
+      "en": "Caregiver Activity Logging"
+    },
+    "service-b-check-2-text": {
+      "ko": "케어 활동 내용이 시간대별로 자동 저장되어 출결 정보와 연계된 업무 이력을 자동화합니다.",
+      "en": "Automatically logs caregiver activities by time, linking them with attendance information for seamless record keeping."
+    },
+    "service-b-check-3-title": {
+      "ko": "행정업무 자동화 및 운영 효율 향상",
+      "en": "Administrative Automation & Operational Efficiency"
+    },
+    "service-b-check-3-text": {
+      "ko": "등·하원 정보, 출석 기록, 케어 이력 기반으로 공단 청구용 수가 연산 자료를 자동 생성하여 업무 효율성을 향상합니다.",
+      "en": "Automatically generates billing data for the national health system based on attendance and care logs, enhancing operational efficiency."
+    },
+    "service-b-extra": {
+      "ko": "헬스클라우드의 등하원 관리 서비스는 장기요양기관에서 피보호자의 안전을 강화하고, 운영 효율을 높이는 차세대 스마트 돌봄 서비스입니다.",
+      "en": "HealthCloud's pick-up & drop-off service strengthens safety for residents and improves operational efficiency in long-term care facilities as a next-generation smart care solution."
+    },
+    "service-c-title": {
+      "ko": "벨루스",
+      "en": "Bellus"
+    },
+    "service-c-description": {
+      "ko": "벨루스 전용 디바이스를 활용하여 피부와 두피 상태를 정밀하게 진단하고, 그 결과에 기반한 맞춤형 관리법과 화장품 추천 서비스를 제공합니다.",
+      "en": "Using Bellus' dedicated device, it accurately diagnoses skin and scalp conditions and provides personalized care methods and product recommendations."
+    },
+    "service-c-check-1-title": {
+      "ko": "피부 진단 (7가지 항목)",
+      "en": "Skin Diagnosis (7 Items)"
+    },
+    "service-c-check-1-text": {
+      "ko": "수분/탄력, 유분, 모공, 색소침착, 피지, 주름, 민감도를 진단합니다.",
+      "en": "Diagnoses moisture/elasticity, sebum, pores, pigmentation, oiliness, wrinkles, and sensitivity."
+    },
+    "service-c-check-2-title": {
+      "ko": "피부톤 진단 (4가지 유형)",
+      "en": "Skin Tone Diagnosis (4 Types)"
+    },
+    "service-c-check-2-text": {
+      "ko": "Bright Cool, Bright Warm, Dark Cool, Dark Warm로 구분하여 진단합니다.",
+      "en": "Diagnosed as Bright Cool, Bright Warm, Dark Cool, Dark Warm."
+    },
+    "service-c-check-3-title": {
+      "ko": "두피 및 모발 진단",
+      "en": "Scalp & Hair Diagnosis"
+    },
+    "service-c-check-3-text": {
+      "ko": "두피 유형, 모발 굵기 및 밀도, 민감도, 블랙헤드를 진단합니다.",
+      "en": "Diagnoses scalp type, hair thickness/density, sensitivity, and blackheads."
+    },
+    "service-c-check-4-title": {
+      "ko": "맞춤형 케어와 화장품 추천",
+      "en": "Customized Care & Product Recommendation"
+    },
+    "service-c-check-4-text": {
+      "ko": "진단 내역을 시각화하여 피부·두피 상태 변화를 관리할 수 있습니다. 진단 결과에 따라 우선적인 케어 방법과 화장품을 제안합니다.",
+      "en": "Visualizes diagnosis results to monitor skin and scalp changes. Suggests prioritized care and products based on results."
+    },
+    "service-c-extra": {
+      "ko": "헬스클라우드의 '벨루스'는 전용 디바이스와 진단 알고리즘으로 비전문가도 두피와 모발 상태를 손쉽게 확인할 수 있습니다. 결과를 바탕으로 최적의 관리 솔루션과 화장품을 제안하여, 현장에서 바로 상담과 체험이 가능합니다.",
+      "en": "HealthCloud's 'Bellus' allows non-professionals to easily check scalp and hair conditions with dedicated devices and algorithms, providing optimal solutions and product suggestions on-site."
+    },
+    "service-c-cta-text": {
+      "ko": "기기 사양은 별도 홈페이지를 확인해주세요.",
+      "en": "Please check the official website for device specifications."
+    },
+    "service-c-cta-link": {
+      "ko": "이동",
+      "en": "Visit"
+    },
+    "service-d-title": {
+      "ko": "아나젠",
+      "en": "Anagen"
+    },
+    "service-d-description": {
+      "ko": "고해상도 이미지 분석과 AI 알고리즘을 결합하여, 두피와 모발 상태를 정밀하게 진단하는 최첨단 솔루션입니다. 탈모, 염증, 비듬 등의 이상 징후를 조기에 감지하며, 개인별 두피 유형과 탈모 진행에 따른 맞춤형 관리 방향을 제시합니다.",
+      "en": "A cutting-edge solution combining high-resolution image analysis and AI algorithms to precisely diagnose scalp and hair conditions. Detects early signs of hair loss, inflammation, dandruff, and provides personalized care based on scalp type and hair loss stage."
+    },
+    "service-d-check-1-title": {
+      "ko": "두피 유형 진단",
+      "en": "Scalp Type Diagnosis"
+    },
+    "service-d-check-1-text": {
+      "ko": "건성, 지성, 복합성 등 두피의 기본 특성을 구분하여 관리 방향을 제안합니다.",
+      "en": "Identifies basic scalp characteristics such as dry, oily, or combination and suggests management directions."
+    },
+    "service-d-check-2-title": {
+      "ko": "탈모 유형 및 단계 분석",
+      "en": "Hair Loss Type & Stage Analysis"
+    },
+    "service-d-check-2-text": {
+      "ko": "탈모 진행 정도를 7단계로 구분하여 체계적인 진단이 가능합니다.",
+      "en": "Classifies hair loss progression into 7 stages for systematic diagnosis."
+    },
+    "service-d-check-3-title": {
+      "ko": "모발 두께 측정",
+      "en": "Hair Thickness Measurement"
+    },
+    "service-d-check-3-text": {
+      "ko": "60배율 고해상도 촬영을 통해 모발의 굵기를 정밀하게 측정하고 평균값을 산출합니다.",
+      "en": "Measures hair thickness precisely with 60x high-resolution imaging and calculates the average."
+    },
+    "service-d-check-4-title": {
+      "ko": "모발 밀도 분석",
+      "en": "Hair Density Analysis"
+    },
+    "service-d-check-4-text": {
+      "ko": "20배율 이미지로 10mm × 10mm 범위 내 모낭당 모발 수를 분석하여 탈모 여부를 진단합니다.",
+      "en": "Analyzes number of hairs per follicle in a 10mm × 10mm area using 20x images to assess hair loss."
+    },
+    "service-d-extra": {
+      "ko": "헬스클라우드의 AI 진단 시스템은 비전문가도 쉽게 사용할 수 있는 자동화 기능을 갖추고 있으며, 병의원은 물론 개인 고객도 활용 가능한 스마트 두피·모발 관리 서비스를 제공합니다.",
+      "en": "HealthCloud's AI diagnostic system offers automated features for easy use by non-professionals, providing smart scalp and hair management for clinics and individual customers."
+    },
+    "service-d-cta-text": {
+      "ko": "기기 사양은 별도 홈페이지를 확인해주세요.",
+      "en": "Please check the official website for device specifications."
+    },
+    "service-d-cta-link": {
+      "ko": "준비 중",
+      "en": "Coming Soon"
+    },
+    "service-list-title": {
+      "ko": "서비스 목록",
+      "en": "Service List"
+    },
+    "service-a-menu": {
+      "ko": "시니어 헬스케어 사이니지",
+      "en": "Senior Healthcare Signage"
+    },
+    "service-b-menu": {
+      "ko": "장기요양기관 등하원 관리",
+      "en": "Long-term Care Attendance Management"
+    },
+    "service-c-menu": {
+      "ko": "(벨루스) 핸디형 피부·두피 진단",
+      "en": "(Bellus) Handy Skin & Scalp Diagnosis"
+    },
+    "service-d-menu": {
+      "ko": "(아나젠) 두피·모발 진단",
+      "en": "(Anagen) Scalp & Hair Diagnosis"
+    },
+    "help-title": {
+      "ko": "문의하기",
+      "en": "Have a Question?"
+    },
+    "help-phone": {
+      "ko": "033-1522-8930 (평일 09:00 – 18:00)",
+      "en": "+82 33-1522-8930 (Weekdays 09:00 – 18:00)"
+    },
+    "help-email": {
+      "ko": "sjyu@h-cloud.co.kr",
+      "en": "sjyu@h-cloud.co.kr"
+    },
+    "page-title-A": {
+      "ko": "시니어 헬스케어 사이니지",
+      "en": "Senior Healthcare Signage"
+    },
+    "page-title-B": {
+      "ko": "장기요양기관 등하원 관리",
+      "en": "Long-term Care Facility Attendance Management"
+    },
+    "page-title-C": {
+      "ko": "(벨루스) 핸디형 피부·두피 진단",
+      "en": "(Bellus) Handy Skin & Scalp Diagnosis"
+    },
+    "page-title-D": {
+      "ko": "(아나젠) 두피·모발 진단",
+      "en": "(Anagen) Scalp & Hair Diagnosis"
+    },
+    "service-a-ip-title-1": { "ko": "시니어케어 솔루션 지적재산권", "en": "Senior Care Solution IP" },
+    "service-a-ip-value-1": { "ko": "7건 특허 & 3건 저작권", "en": "7 Patents & 3 Copyrights" },
+    "service-a-ip-desc-1": { "ko": "시니어케어 솔루션 IP 확보", "en": "Secured IP for Senior Care Solution" },
+
+    "service-a-ip-title-2": { "ko": "AI 솔루션 지적재산권", "en": "AI Solution IP" },
+    "service-a-ip-value-2": { "ko": "2건 특허 & 4건 저작권", "en": "2 Patents & 4 Copyrights" },
+    "service-a-ip-desc-2": { "ko": "AI 솔루션 IP 확보", "en": "Secured IP for AI Solution" },
+
+    "service-a-task-title": { "ko": "2025년 과제수주", "en": "2025 Project Awards" },
+    "service-a-task-value": { "ko": "총 8건 과제 수주", "en": "Total 8 Projects Awarded" },
+    "service-a-task-desc": { "ko": "R&D 2건, 비R&D 5건, 데이터바우처 1건", "en": "R&D 2, Non-R&D 5, Data Voucher 1" },
+
+    "service-a-collab-title": { "ko": "지역 및 대학 협력", "en": "Regional & University Collaboration" },
+    "service-a-collab-value": { "ko": "5개 얼라이언스 구축", "en": "5 Alliances Established" },
+    "service-a-collab-desc": {
+      "ko": "K-바이오헬스, 상지대학교 얼라이언스, 레전드 50+, 고대구로병원 개방형실험실, 강원 AI 헬스케어 글로벌혁신특구",
+      "en": "K-BioHealth, Sangji University Alliance, Legend 50+, Korea University Guro Hospital Open Lab, Gangwon AI Healthcare Global Innovation Zone"
     }
   }
 
+  const contents = {
+    "#A": { templateId: "template-A", title: "시니어 헬스케어 사이니지" },
+    "#B": { templateId: "template-B", title: "장기요양기관 등하원 관리" },
+    "#C": { templateId: "template-C", title: "(벨루스) 핸디형 피부·두피 진단" },
+    "#D": { templateId: "template-D", title: "(아나젠) 두피·모발 진단" }
+  };
+  let currentLang = "ko";
+
+
+  /**
+   * Apply .scrolled class to the body as the page is scrolled down
+   */
+  function toggleScrolled() {
+    const selectBody = document.querySelector('body');
+    const selectHeader = document.querySelector('#header');
+    if (!selectHeader.classList.contains('scroll-up-sticky') && !selectHeader.classList.contains('sticky-top') && !selectHeader.classList.contains('fixed-top')) return;
+    window.scrollY > 100 ? selectBody.classList.add('scrolled') : selectBody.classList.remove('scrolled');
+  }
+
+  document.addEventListener('scroll', toggleScrolled);
+  window.addEventListener('load', toggleScrolled);
+
+  /**
+   * Mobile nav toggle
+   */
+  const mobileNavToggleBtn = document.querySelector('.mobile-nav-toggle');
+
+  function mobileNavToogle() {
+    document.querySelector('body').classList.toggle('mobile-nav-active');
+    mobileNavToggleBtn.classList.toggle('bi-list');
+    mobileNavToggleBtn.classList.toggle('bi-x');
+  }
+  if (mobileNavToggleBtn) {
+    mobileNavToggleBtn.addEventListener('click', mobileNavToogle);
+  }
+
+  /**
+   * Hide mobile nav on same-page/hash links
+   */
+  document.querySelectorAll('#navmenu a').forEach(navmenu => {
+    navmenu.addEventListener('click', () => {
+      if (document.querySelector('.mobile-nav-active')) {
+        mobileNavToogle();
+      }
+    });
+
+  });
+
+  /**
+   * Toggle mobile nav dropdowns
+   */
+  document.querySelectorAll('.navmenu .toggle-dropdown').forEach(navmenu => {
+    navmenu.addEventListener('click', function (e) {
+      e.preventDefault();
+      this.parentNode.classList.toggle('active');
+      this.parentNode.nextElementSibling.classList.toggle('dropdown-active');
+      e.stopImmediatePropagation();
+    });
+  });
+
+  /**
+   * Scroll top button
+   */
+  let scrollTop = document.querySelector('.scroll-top');
+
+  function toggleScrollTop() {
+    if (scrollTop) {
+      window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
+    }
+  }
+  scrollTop.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  window.addEventListener('load', toggleScrollTop);
+  document.addEventListener('scroll', toggleScrollTop);
+
+  /**
+   * Animation on scroll function and init
+   */
+  function aosInit() {
+    AOS.init({
+      duration: 600,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    });
+  }
+  window.addEventListener('load', aosInit);
+
+  /**
+   * Initiate glightbox
+   */
+  const glightbox = GLightbox({
+    selector: '.glightbox'
+  });
+
+  /**
+   * Init swiper sliders
+   */
+  function initSwiper() {
+    document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
+      let config = JSON.parse(
+        swiperElement.querySelector(".swiper-config").innerHTML.trim()
+      );
+
+      if (swiperElement.classList.contains("swiper-tab")) {
+        initSwiperWithCustomPagination(swiperElement, config);
+      } else {
+        new Swiper(swiperElement, config);
+      }
+    });
+  }
+
+  window.addEventListener("load", initSwiper);
+
+  /**
+   * Initiate Pure Counter
+   */
+  new PureCounter();
+
+  /**
+   * Frequently Asked Questions Toggle
+   */
+  document.querySelectorAll('.faq-item h3, .faq-item .faq-toggle').forEach((faqItem) => {
+    faqItem.addEventListener('click', () => {
+      faqItem.parentNode.classList.toggle('faq-active');
+    });
+  });
+
+  /**
+   * Correct scrolling position upon page load for URLs containing hash links.
+   */
+  window.addEventListener('load', function (e) {
+    if (window.location.hash) {
+      if (document.querySelector(window.location.hash)) {
+        setTimeout(() => {
+          let section = document.querySelector(window.location.hash);
+          let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
+          window.scrollTo({
+            top: section.offsetTop - parseInt(scrollMarginTop),
+            behavior: 'smooth'
+          });
+        }, 100);
+      }
+    }
+  });
+
+  /**
+   * Navmenu Scrollspy
+   */
+  let navmenulinks = document.querySelectorAll('.navmenu a');
+
+  function navmenuScrollspy() {
+    navmenulinks.forEach(navmenulink => {
+      if (!navmenulink.hash) return;
+      let section = document.querySelector(navmenulink.hash);
+      if (!section) return;
+      let position = window.scrollY + 200;
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        navmenulink.classList.add('active');
+      } else {
+        navmenulink.classList.remove('active');
+      }
+    })
+  }
+  window.addEventListener('load', navmenuScrollspy);
+  document.addEventListener('scroll', navmenuScrollspy);
+
+  /**
+   * Service Details hash 기반 콘텐츠 전환
+   */
+  function renderContent() {
+    const hash = window.location.hash || "#A";
+    const data = contents[hash];
+    const container = document.getElementById("dynamic-content");
+    container.textContent = "";
+
+    if (data?.templateId) {
+      const template = document.getElementById(data.templateId);
+      if (template) {
+        container.appendChild(template.content.cloneNode(true));
+
+        // template 태그는 렌더링안된 상태로 있어서 렌더링 후에 update
+        updateContent();
+      }
+    }
+  }
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    updateContent();
+  }
+
+  function updateActiveLink() {
+    const hash = window.location.hash || "#A";
+    document.querySelectorAll(".services-list a").forEach(link => {
+      link.classList.toggle("active", link.getAttribute("href") === hash);
+    });
+  }
+
+  function updatePageTitle() {
+    const hash = window.location.hash || "#A";
+    const key = `page-title-${hash.substring(1)}`; // "#A" -> "page-title-A"
+    console.log(key);
+    const titleElement = document.getElementById("page-title");
+    if (translations[key] && translations[key][currentLang]) {
+      titleElement.textContent = translations[key][currentLang];
+    }
+  }
+
+  function handleHashChange() {
+    renderContent();
+    updateActiveLink();
+    updatePageTitle();
+  }
+
+  window.addEventListener("DOMContentLoaded", handleHashChange);
+  window.addEventListener("hashchange", handleHashChange);
+
+
   // 2️⃣ 업데이트 함수
-  function updateContent(lang) {
+  function updateContent() {
     document.querySelectorAll('[data-text-lang-key]').forEach(el => {
-      const key = el.dataset.textLangKey;
-      if (translations[key] && translations[key][lang]) {
-        el.textContent = translations[key][lang];
+      if (el.id === "page-title") {
+        updatePageTitle();
+      } else {
+        const key = el.dataset.textLangKey;
+        if (translations[key] && translations[key][currentLang]) {
+          el.textContent = translations[key][currentLang];
+        }
       }
     });
   }
@@ -485,7 +752,7 @@
         '--heading-font',
         "'Noto Sans KR', 'Nunito', sans-serif"
       );
-      updateContent('ko')
+      setLanguage('ko')
     });
 
     langEn.addEventListener('change', () => {
@@ -497,10 +764,10 @@
         '--heading-font',
         "'Nunito', sans-serif, 'Noto Sans KR'"
       );
-      updateContent('en')
+      setLanguage('en')
     });
   }
   document.addEventListener('DOMContentLoaded', handleLanguage);
+  setLanguage('ko');
 
-  updateContent('ko');
 })();
