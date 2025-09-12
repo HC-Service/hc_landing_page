@@ -54,8 +54,14 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#about">Get Started</a>
+      <!-- <a class="btn-getstarted" href="index.html#about">한국어 | English</a> -->
+      <div class="btn-group" role="group" aria-label="Language toggle">
+        <input type="radio" class="btn-check" name="lang" id="lang-ko" autocomplete="off" checked>
+        <label class="btn btn-outline-primary" for="lang-ko">한국어</label>
 
+        <input type="radio" class="btn-check" name="lang" id="lang-en" autocomplete="off">
+        <label class="btn btn-outline-primary" for="lang-en">English</label>
+      </div>
     </div>
   </header>
 
@@ -74,15 +80,9 @@
                 Working for your success
               </div>
 
-              <h1 class="hero-title mb-4">
-                헬스클라우드(주)
-              </h1>
+              <h1 class="hero-title mb-4" data-text-lang-key="text-hero-title"></h1>
 
-              <p class="hero-description mb-4 mb-md-5">
-                디지털 헬스케어 영역을 중심으로 최신 ICT 역량/노하우를 활용합니다.
-                <br>
-                최적의 서비스를 제공하고 사용자 건강과 행복 달성을 실현합니다.
-              </p>
+              <p class="hero-description mb-4 mb-md-5" data-text-lang-key="text-hero-description"></p>
 
               <div class="hero-buttons">
                 <a href="#about" class="btn btn-primary me-0 me-sm-2 mx-1">Get Started</a>
@@ -143,23 +143,18 @@
             </div>
           </div>
         </div>
-
       </div>
-
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
     <section id="about" class="about section">
-
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-
         <div class="row gy-4 align-items-center justify-content-between">
 
           <div class="col-xl-5" data-aos="fade-up" data-aos-delay="200">
-            <span class="about-meta">MORE ABOUT US</span>
-            <h2 class="about-title">초고령화 사회,<br>돌봄의 새로운 패러다임이 필요합니다.</h2>
-            <p class="about-description">치료를 넘어, 어르신들이 스스로 건강을 관리하고 활기찬 삶을 이어갈 수 있도록 돕는 혁신 솔루션이 필요합니다.
-              헬스클라우드(주)는 어르신들의 건강한 삶을 위한 혁신을 만들어갑니다.</p>
+            <span class="about-meta" data-text-lang-key="text-about-meta"></span>
+            <h2 class="about-title" data-text-lang-key="text-about-title"></h2>
+            <p class="about-description" data-text-lang-key="text-about-description"></p>
 
             <div class="about">
               <div class="feature-list-wrapper">
@@ -169,8 +164,8 @@
                       <li>
                         <i class="bi bi-check-circle-fill"></i>
                         <div>
-                          <strong>예방 중심 케어</strong>
-                          <p class="about-pp">조기 진단과 지속적인 건강 관리를 통해 더 나은 삶을 지원합니다.</p>
+                          <strong data-text-lang-key="text-feature-1-title"></strong>
+                          <p class="about-pp" data-text-lang-key="text-feature-1-desc"></p>
                         </div>
                       </li>
                     </ul>
@@ -180,8 +175,8 @@
                       <li>
                         <i class="bi bi-check-circle-fill"></i>
                         <div>
-                          <strong>사용자 편의성</strong>
-                          <p class="about-pp">어르신들도 쉽게 사용할 수 있는 직관적이고 편리한 디지털 헬스케어 서비스를 제공합니다.</p>
+                          <strong data-text-lang-key="text-feature-2-title"></strong>
+                          <p class="about-pp" data-text-lang-key="text-feature-2-desc"></p>
                         </div>
                       </li>
                     </ul>
@@ -194,8 +189,8 @@
                       <li>
                         <i class="bi bi-check-circle-fill"></i>
                         <div>
-                          <strong>데이터 기반 맞춤형 케어</strong>
-                          <p class="about-pp">AI와 데이터 분석 기술을 활용해 개인별 건강 상태에 최적화된 맞춤형 솔루션을 제공합니다.</p>
+                          <strong data-text-lang-key="text-feature-3-title"></strong>
+                          <p class="about-pp" data-text-lang-key="text-feature-3-desc"></p>
                         </div>
                       </li>
                     </ul>
@@ -205,8 +200,8 @@
                       <li>
                         <i class="bi bi-check-circle-fill"></i>
                         <div>
-                          <strong>삶의 질을 높이는 혁신</strong>
-                          <p class="about-pp">기존 의료 서비스의 한계를 넘어, 어르신들의 일상과 건강을 근본적으로 개선하는 솔루션을 연구합니다.</p>
+                          <strong data-text-lang-key="text-feature-4-title"></strong>
+                          <p class="about-pp" data-text-lang-key="text-feature-4-desc"></p>
                         </div>
                       </li>
                     </ul>
@@ -221,8 +216,8 @@
                   <div class="profile d-flex align-items-center gap-3">
                     <img src="assets/img/hc_ceo.png" alt="CEO Profile" class="profile-image">
                     <div>
-                      <h4 class="profile-name">임태호</h4>
-                      <p class="profile-position">CEO</p>
+                      <h4 class="profile-name" data-text-lang-key="text-ceo-name"></h4>
+                      <p class="profile-position" data-text-lang-key="text-ceo-position"></p>
                     </div>
                   </div>
                 </div>
@@ -230,8 +225,8 @@
                   <div class="contact-info d-flex align-items-center gap-2">
                     <i class="bi bi-telephone-fill"></i>
                     <div>
-                      <p class="contact-label">Call us anytime</p>
-                      <p class="contact-number">+82 33-1522-8930</p>
+                      <p class="contact-label" data-text-lang-key="text-contact-label"></p>
+                      <p class="contact-number" data-text-lang-key="text-contact-number"></p>
                     </div>
                   </div>
                 </div>
@@ -242,50 +237,47 @@
           <div class="col-xl-6" data-aos="fade-up" data-aos-delay="300">
             <div class="image-wrapper">
               <div class="images position-relative" data-aos="zoom-out" data-aos-delay="400">
-                <img src="assets/img/office_1.png" alt="Business Meeting" class="img-fluid main-image rounded-4">
-                <img src="assets/img/about-2.webp" alt="Team Discussion" class="img-fluid small-image rounded-4">
+                <img src="assets/img/gmes_ex.jpg" alt="Business Meeting" class="img-fluid main-image rounded-4">
+                <!-- <img src="assets/img/about-2.webp" alt="Team Discussion" class="img-fluid small-image rounded-4"> -->
               </div>
               <div class="experience-badge floating">
-                <h3>20+ <span>년 경력</span></h3>
-                <p>의료·헬스케어 전문 노하우</p>
+                <h3>20+ <span data-text-lang-key="text-years"></span> </h3>
+                <p data-text-lang-key="text-experience-desc"></p>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
-    </section><!-- /About Section -->
+    </section>
 
     <!-- Features Section -->
     <section id="features" class="features section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Solution</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <h2 data-text-lang-key="text-features-title">Solution</h2>
+        <p data-text-lang-key="text-features-description">
+        </p>
+      </div>
 
       <div class="container">
 
         <div class="d-flex justify-content-center">
-
           <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
 
             <li class="nav-item">
               <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
-                <h4>영상·이미지 AI 솔루션</h4>
+                <h4 data-text-lang-key="text-feature-tab-1"></h4>
               </a>
-            </li><!-- End tab nav item -->
+            </li>
 
             <li class="nav-item">
               <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
-                <h4>시니어 디지털 헬스케어 솔루션</h4>
-              </a><!-- End tab nav item -->
+                <h4 data-text-lang-key="text-feature-tab-2"></h4>
+              </a>
             </li>
 
           </ul>
-
         </div>
 
         <div>
@@ -294,69 +286,68 @@
             <div class="tab-pane fade active show" id="features-tab-1">
               <div class="row">
                 <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                  <h3>영상·이미지 AI 솔루션</h3>
-                  <p class="fst-italic">
-                    헬스클라우드(주)는 영상·이미지 데이터 분석 기술을 기반으로,<br> 의료·헬스케어 분야에서 확장 가능한 AI 솔루션을 제공합니다.
+                  <h3 data-text-lang-key="text-feature-1-title"></h3>
+                  <p class="fst-italic" data-text-lang-key="text-feature-1-desc">
                   </p>
                   <ul>
-                    <li><i class="bi bi-check2-all"></i> <span>벨루스 프로젝트 기반의 피부 및 피부톤, 두피 진단 서비스</span></li>
-                    <li><i class="bi bi-check2-all"></i> <span>아나젠 프로젝트 기반의 두피 진단 서비스</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span data-text-lang-key="text-feature-1-item-1"></span></li>
+                    <li><i class="bi bi-check2-all"></i> <span data-text-lang-key="text-feature-1-item-2"></span></li>
                   </ul>
                 </div>
 
                 <div class="col-lg-6 order-1 order-lg-2 text-center">
                   <div class="feature-card d-flex flex-column align-items-center">
                     <img src="assets/img/아나젠.png" alt="아나젠" class="img-fluid w-75 h-auto">
-                    <small class="d-block fw-bold text-dark">아나젠 — 두피 진단</small>
+                    <small class="d-block fw-bold text-dark" data-text-lang-key="text-feature-1-img1-caption"></small>
 
                     <img src="assets/img/벨루스.png" alt="벨루스" class="img-fluid mt-4 w-75 h-auto">
-                    <small class="d-block mt-3 fw-bold text-dark">벨루스 — 피부 및 두피 진단</small>
+                    <small class="d-block mt-3 fw-bold text-dark"
+                      data-text-lang-key="text-feature-1-img2-caption"></small>
                   </div>
                 </div>
               </div>
-            </div><!-- End tab content item -->
+            </div>
 
             <div class="tab-pane fade" id="features-tab-2">
               <div class="row">
-                <!-- 왼쪽: 텍스트 -->
                 <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                  <h3>시니어 디지털 헬스케어 솔루션</h3>
-                  <p class="fst-italic">
-                    헬스클라우드(주)는 오프라인 장기요양기관 운영 경험과<br> 네트워크를 바탕으로 신뢰성 있는 솔루션을 제공합니다.
+                  <h3 data-text-lang-key="text-feature-2-title"></h3>
+                  <p class="fst-italic" data-text-lang-key="text-feature-2-desc">
                   </p>
                   <ul>
-                    <li><i class="bi bi-check2-all"></i> <span>노인의 건강한 삶을 위한 맞춤형 인지 및 신체 관리 서비스</span></li>
-                    <li><i class="bi bi-check2-all"></i> <span>노인 복지 시설 이용을 위한 등·하원 서비스</span></li>
+                    <li><i class="bi bi-check2-all"></i> <span data-text-lang-key="text-feature-2-item-1"></span></li>
+                    <li><i class="bi bi-check2-all"></i> <span data-text-lang-key="text-feature-2-item-2"></span></li>
                   </ul>
                 </div>
 
                 <div class="col-lg-6 order-1 order-lg-2 text-center">
                   <div class="feature-card d-flex flex-column align-items-center">
                     <img src="assets/img/사이니지.png" alt="." class="img-fluid w-75 h-auto">
-                    <small class="d-block fw-bold text-dark mt-1">
-                      시니어 헬스케어 사이니지</small>
+                    <small class="d-block fw-bold text-dark mt-1"
+                      data-text-lang-key="text-feature-2-img1-caption"></small>
 
                     <img src="assets/img/B1.png" alt="." class="img-fluid mt-4 w-75 h-auto">
-                    <small class="d-block mt-3 fw-bold text-dark">장기요양기관 등하원 서비스</small>
+                    <small class="d-block mt-3 fw-bold text-dark"
+                      data-text-lang-key="text-feature-2-img2-caption"></small>
                   </div>
                 </div>
               </div>
-            </div><!-- End tab content item -->
+            </div>
 
           </div>
-
         </div>
 
-    </section><!-- /Features Section -->
+    </section>
 
     <!-- Services Section -->
     <section id="services" class="services section light-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+        <h2 data-text-lang-key="text-services-title">Services</h2>
+        <p data-text-lang-key="text-services-description">
+        </p>
+      </div>
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -368,13 +359,14 @@
                 <i class="bi bi-activity"></i>
               </div>
               <div>
-                <h3>시니어 헬스케어 사이니지</h3>
-                <p>AI 기술과 사이니지 기기를 기반으로, 고령자의 건강한 노후 생활을 돕기 위한 통합 건강지원 서비스를 제공합니다.
-                  인지 기능과 신체 능력을 체계적으로 진단하고, 개인 맞춤형 개선 프로그램을 통해 인지력 향상과 신체 활력 회복을 지원합니다.</p>
-                <a href="service-details.html#A" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                <h3 data-text-lang-key="text-service-1-title"></h3>
+                <p data-text-lang-key="text-service-1-desc"></p>
+                <a href="service-details.html#A" class="read-more" data-text-lang-key="text-service-1-link"><i
+                    class="bi bi-arrow-right"></i>
+                </a>
               </div>
             </div>
-          </div><!-- End Service Card -->
+          </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-card d-flex">
@@ -382,13 +374,15 @@
                 <i class="bi bi-diagram-3"></i>
               </div>
               <div>
-                <h3>장기요양기관 등하원 관리</h3>
-                <p>고령자 및 돌봄 대상자의 등·하원 정보를 정확하고 효율적으로 관리할 수 있는 스마트 출결 관리 서비스를 제공합니다.
-                  얼굴 인식 등하원 관리부터 관련 증빙 자료 생성까지, 신뢰도 높은 관리 시스템을 구현합니다.</p>
-                <a href="service-details.html#B" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                <h3 data-text-lang-key="text-service-2-title"></h3>
+                <p data-text-lang-key="text-service-2-desc">
+                </p>
+                <a href="service-details.html#B" class="read-more" data-text-lang-key="text-service-2-link">
+                  <i class="bi bi-arrow-right"></i>
+                </a>
               </div>
             </div>
-          </div><!-- End Service Card -->
+          </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
             <div class="service-card d-flex">
@@ -396,13 +390,15 @@
                 <i class="bi bi-easel"></i>
               </div>
               <div>
-                <h3>(벨루스) 핸디형 피부·두피 진단</h3>
-                <p>벨루스 전용 디바이스를 활용하여 피부와 두피 상태를 정밀하게 진단하고, AI 분석 결과를 바탕으로 개인별 맞춤형 관리 방법과 화장품을 추천합니다.
-                  정확한 진단과 과학적 솔루션을 통해 피부·두피 건강을 효과적으로 개선합니다.</p>
-                <a href="service-details.html#C" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                <h3 data-text-lang-key="text-service-3-title"></h3>
+                <p data-text-lang-key="text-service-3-desc">
+                </p>
+                <a href="service-details.html#C" class="read-more" data-text-lang-key="text-service-3-link">
+                  <i class="bi bi-arrow-right"></i>
+                </a>
               </div>
             </div>
-          </div><!-- End Service Card -->
+          </div>
 
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
             <div class="service-card d-flex">
@@ -410,27 +406,28 @@
                 <i class="bi bi-clipboard-data"></i>
               </div>
               <div>
-                <h3>(아나젠) 두피·모발 진단</h3>
-                <p>아나젠 전용 디바이스를 활용하여 고해상도 이미지 분석과 딥러닝 알고리즘을 통해 두피와 모발 상태를 정밀하게 진단합니다.
-                  과학적 데이터 기반의 분석으로 개인 맞춤형 두피·모발 관리 솔루션을 제공합니다</p>
-                <a href="service-details.html#D" class="read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                <h3 data-text-lang-key="text-service-4-title"></h3>
+                <p data-text-lang-key="text-service-4-desc">
+                </p>
+                <a href="service-details.html#D" class="read-more" data-text-lang-key="text-service-4-link">
+                  <i class="bi bi-arrow-right"></i>
+                </a>
               </div>
             </div>
-          </div><!-- End Service Card -->
+          </div>
 
         </div>
 
       </div>
 
-    </section><!-- /Services Section -->
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact section light-background">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2 data-text-lang-key="text-contact-title">Contact</h2>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -439,8 +436,8 @@
         <div class="row g-4 g-lg-5 d-flex align-items-stretch">
           <div class="col-lg-5">
             <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-              <h3>Contact Info</h3>
-              <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ante ipsum primis.
+              <h3 data-text-lang-key="text-contact-info-title"></h3>
+              <p data-text-lang-key="text-contact-info-desc">
               </p>
 
               <div class="info-item" data-aos="fade-up" data-aos-delay="300">
@@ -448,9 +445,10 @@
                   <i class="bi bi-geo-alt"></i>
                 </div>
                 <div class="content">
-                  <h4>찾아오시는 길</h4>
-                  <p>헬스클라우드(주) 본사</p>
-                  <p>강원특별자치도 원주시 혁신로 19, H타워 A동 708호 (26460)</p>
+                  <h4 data-text-lang-key="text-contact-location-title"></h4>
+                  <p data-text-lang-key="text-contact-location-name"></p>
+                  <p data-text-lang-key="text-contact-location-address">
+                  </p>
                 </div>
               </div>
 
@@ -459,9 +457,9 @@
                   <i class="bi bi-telephone"></i>
                 </div>
                 <div class="content">
-                  <h4>Phone Number</h4>
-                  <p>+1 5589 55488 55</p>
-                  <p>+1 6678 254445 41</p>
+                  <h4 data-text-lang-key="text-contact-phone-title"></h4>
+                  <p data-text-lang-key="text-contact-phone-number">
+                  </p>
                 </div>
               </div>
 
@@ -470,14 +468,12 @@
                   <i class="bi bi-envelope"></i>
                 </div>
                 <div class="content">
-                  <h4>Email Address</h4>
-                  <p>info@example.com</p>
-                  <p>contact@example.com</p>
+                  <h4 data-text-lang-key="text-contact-email-title"></h4>
+                  <p data-text-lang-key="text-contact-email-address"></p>
                 </div>
               </div>
             </div>
           </div>
-
 
           <!-- 오른쪽: 구글 지도 -->
           <div class="col-lg-7">
@@ -491,7 +487,6 @@
 
         </div>
 
-
         <div class="my-5"></div>
       </div>
     </section><!-- /Contact Section -->
@@ -499,18 +494,7 @@
   </main>
 
   <footer id="footer" class="footer">
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">iLanding</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you've purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed By <a
-          href="https://themewagon.com">ThemeWagon</a>
-      </div>
-    </div>
-
+    
   </footer>
 
   <!-- Scroll Top -->

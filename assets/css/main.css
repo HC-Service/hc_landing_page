@@ -88,58 +88,6 @@ h6 {
     font-family: var(--heading-font);
 }
 
-/* PHP Email Form Messages
-------------------------------*/
-.php-email-form .error-message {
-    display: none;
-    background: #df1529;
-    color: #ffffff;
-    text-align: left;
-    padding: 15px;
-    margin-bottom: 24px;
-    font-weight: 600;
-}
-
-.php-email-form .sent-message {
-    display: none;
-    color: #ffffff;
-    background: #059652;
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 24px;
-    font-weight: 600;
-}
-
-.php-email-form .loading {
-    display: none;
-    background: var(--surface-color);
-    text-align: center;
-    padding: 15px;
-    margin-bottom: 24px;
-}
-
-.php-email-form .loading:before {
-    content: '';
-    display: inline-block;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    margin: 0 10px -6px 0;
-    border: 3px solid var(--accent-color);
-    border-top-color: var(--surface-color);
-    animation: php-email-form-loading 1s linear infinite;
-}
-
-@keyframes php-email-form-loading {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
 /*--------------------------------------------------------------
 # Global Header
 --------------------------------------------------------------*/
@@ -197,6 +145,36 @@ h6 {
     background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
 
+/* 공통 버튼 스타일 */
+.btn-group .btn {
+    font-size: 14px;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: 0.3s;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: transparent;
+}
+
+/* 선택된 상태 */
+.btn-group .btn-check:checked + .btn {
+    color: var(--contrast-color);
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* 호버 상태 */
+.btn-group .btn:hover {
+    color: var(--contrast-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    border-color: var(--accent-color);
+}
+
+/* 포커스 시 아웃라인 제거 */
+.btn-group .btn:focus {
+    box-shadow: none;
+}
+
 @media (max-width: 1200px) {
     .header {
         padding-top: 10px;
@@ -218,8 +196,45 @@ h6 {
         padding: 6px 15px;
     }
 
+    .btn-group {
+        order: 2;
+        margin: 0 10px 0 0;
+        padding: 6px 15px;
+    }
+
     .header .navmenu {
         order: 3;
+    }
+}
+
+/* 모바일에서는 세로로 쌓기 */
+@media (max-width: 576px) {
+    .btn-group .btn {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        width: 120px;
+    }
+
+    .btn-group label.btn {
+        border-radius: 50px !important; /* 전체 둥글게 */
+        margin: 1px 0; /* 버튼 사이 여백 */
+        text-align: center;
+    }
+
+    .btn-group .btn-check:checked + .btn {
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+        border-color: var(--accent-color);
+    }
+
+    .btn-group label.btn:hover {
+        background: color-mix(in srgb, var(--accent-color), transparent 15%);
+        color: var(--contrast-color);
     }
 }
 
@@ -2181,6 +2196,10 @@ section,
     color: var(--contrast-color);
     font-size: 2rem;
     margin-bottom: 1rem;
+}
+
+.contact .section-title {
+    padding-bottom: 40px;
 }
 
 @media (max-width: 767.98px) {
