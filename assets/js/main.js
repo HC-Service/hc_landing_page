@@ -228,7 +228,7 @@
     },
     "text-contact-phone-number": {
       "ko": `033-1522-8930 (평일 09:00 – 18:00)`,
-      "en": "+82 33-1522-8930 (Weekdays 09:00 – 18:00)"
+      "en": "+82 33-1522-8930 (Weekdays 09:00 – 18:00 KST)"
     },
     "text-contact-email-title": {
       "ko": "Email Address",
@@ -372,7 +372,7 @@
     },
     "service-c-cta-text": {
       "ko": "기기 사양은 별도 홈페이지를 확인해주세요.",
-      "en": "Please check the official website for device specifications."
+      "en": "Please check the website for device specifications."
     },
     "service-c-cta-link": {
       "ko": "이동",
@@ -424,7 +424,7 @@
     },
     "service-d-cta-text": {
       "ko": "기기 사양은 별도 홈페이지를 확인해주세요.",
-      "en": "Please check the official website for device specifications."
+      "en": "Please check the website for device specifications."
     },
     "service-d-cta-link": {
       "ko": "준비 중",
@@ -455,8 +455,8 @@
       "en": "Have a Question?"
     },
     "help-phone": {
-      "ko": "033-1522-8930 (평일 09:00 – 18:00)",
-      "en": "+82 33-1522-8930 (Weekdays 09:00 – 18:00)"
+      "ko": "033-1522-8930",
+      "en": "+82 33-1522-8930"
     },
     "help-email": {
       "ko": "sjyu@h-cloud.co.kr",
@@ -504,8 +504,6 @@
     "#C": { templateId: "template-C", title: "(벨루스) 핸디형 피부·두피 진단" },
     "#D": { templateId: "template-D", title: "(아나젠) 두피·모발 진단" }
   };
-  let currentLang = "ko";
-
 
   /**
    * Apply .scrolled class to the body as the page is scrolled down
@@ -672,6 +670,18 @@
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
 
+  function scrollToDynamicContent() {
+    if (window.innerWidth >= 992) return; // lg 이상에서는 스크롤하지 않음
+
+    const container = document.getElementById("dynamic-content");
+    if (!container) return;
+
+    const yOffset = -40; // 상단에서 여유
+    const y = container.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
   /**
    * Service Details hash 기반 콘텐츠 전환
    */
@@ -690,11 +700,8 @@
         updateContent();
       }
     }
-  }
 
-  function setLanguage(lang) {
-    currentLang = lang;
-    updateContent();
+    scrollToDynamicContent();
   }
 
   function updateActiveLink() {
@@ -707,14 +714,16 @@
   function updatePageTitle() {
     const hash = window.location.hash || "#A";
     const key = `page-title-${hash.substring(1)}`; // "#A" -> "page-title-A"
-    console.log(key);
     const titleElement = document.getElementById("page-title");
-    if (translations[key] && translations[key][currentLang]) {
-      titleElement.textContent = translations[key][currentLang];
+    const savedLang = sessionStorage.getItem("lang") || "ko";
+    if (translations[key] && translations[key][savedLang]) {
+      titleElement.textContent = translations[key][savedLang];
     }
   }
 
   function handleHashChange() {
+    if (!window.location.pathname.endsWith("service-details.html")) return;
+
     renderContent();
     updateActiveLink();
     updatePageTitle();
@@ -731,8 +740,9 @@
         updatePageTitle();
       } else {
         const key = el.dataset.textLangKey;
-        if (translations[key] && translations[key][currentLang]) {
-          el.textContent = translations[key][currentLang];
+        const savedLang = sessionStorage.getItem("lang") || "ko";
+        if (translations[key] && translations[key][savedLang]) {
+          el.textContent = translations[key][savedLang];
         }
       }
     });
@@ -742,8 +752,32 @@
     const langKo = document.getElementById('lang-ko');
     const langEn = document.getElementById('lang-en');
 
-    // 토글 이벤트
+    // 저장된 언어 불러오기 (없으면 ko 기본값)
+    const savedLang = sessionStorage.getItem("lang") || "ko";
+    applyLanguage(savedLang);
+
+    // 체크박스 상태 반영
+    if (savedLang === "ko") {
+      langKo.checked = true;
+    } else {
+      langEn.checked = true;
+    }
+
+    // 한국어 선택
     langKo.addEventListener('change', () => {
+      sessionStorage.setItem("lang", "ko"); // 저장
+      applyLanguage("ko");
+    });
+
+    // 영어 선택
+    langEn.addEventListener('change', () => {
+      sessionStorage.setItem("lang", "en"); // 저장
+      applyLanguage("en");
+    });
+  }
+
+  function applyLanguage(lang) {
+    if (lang === "ko") {
       document.documentElement.style.setProperty(
         '--default-font',
         "'Noto Sans KR', 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
@@ -752,10 +786,7 @@
         '--heading-font',
         "'Noto Sans KR', 'Nunito', sans-serif"
       );
-      setLanguage('ko')
-    });
-
-    langEn.addEventListener('change', () => {
+    } else {
       document.documentElement.style.setProperty(
         '--default-font',
         "'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', 'Noto Sans KR'"
@@ -764,10 +795,10 @@
         '--heading-font',
         "'Nunito', sans-serif, 'Noto Sans KR'"
       );
-      setLanguage('en')
-    });
+    }
+    updateContent();
   }
+
   document.addEventListener('DOMContentLoaded', handleLanguage);
-  setLanguage('ko');
 
 })();

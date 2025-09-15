@@ -652,8 +652,12 @@ h6 {
 }
 
 @media (max-width: 576px) {
+    .page-title {
+        padding: 60px 0 40px 0;
+    }
+
     .page-title h1 {
-        font-size: 2rem; /* 화면이 작아지면 글자 작게 */
+        font-size: 1.8rem; /* 화면이 작아지면 글자 작게 */
     }
 }
 
@@ -695,6 +699,13 @@ section,
     section,
     .section {
         scroll-margin-top: 66px;
+    }
+}
+
+@media (max-width: 576px) {
+    section,
+    .section {
+        padding: 40px 0;
     }
 }
 
@@ -829,6 +840,10 @@ section,
     .hero .hero-content p {
         font-size: 0.9rem;
         margin-bottom: 1.5rem;
+    }
+
+    .hero {
+        padding-top: 60px;
     }
 }
 
@@ -2651,6 +2666,13 @@ section,
 
 .service-details .services-img {
     margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+    /* 모바일 이하 */
+    #service-details {
+        padding: 30px 0 !important;
+    }
 }
 
 /* .service-details h3 {

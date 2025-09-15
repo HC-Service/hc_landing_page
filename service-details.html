@@ -9,8 +9,8 @@
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/img/hc_symbol_default.png" rel="icon">
+  <link href="assets/img/hc_symbol_default.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -252,15 +252,14 @@
         <p class="service-detail-text mb-4" data-text-lang-key="service-c-extra"></p>
 
         <!-- CTA -->
-        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
-          <p class="service-detail-cta-text mb-0" data-text-lang-key="service-c-cta-text"></p>
-          <a href="https://belluslab.com/product1/" target="_blank" rel="noopener noreferrer"
-            class="service-detail-cta-link">
+        <div class="text-end">
+          <p class="service-detail-cta-text d-inline-block text-break mb-0" style="max-width:100%;"
+            data-text-lang-key="service-c-cta-text">
+          </p>
+          <a class="service-detail-cta-link d-inline-block ms-2" rel="noopener noreferrer">
             <span data-text-lang-key="service-c-cta-link"></span>
-            <span class="service-detail-cta-arrow"></span>
           </a>
         </div>
-
       </div>
     </div>
   </template>
@@ -335,9 +334,11 @@
         <p class="service-detail-text mb-4" data-text-lang-key="service-d-extra"></p>
 
         <!-- CTA -->
-        <div class="d-flex flex-wrap align-items-center justify-content-end gap-2">
-          <p class="service-detail-cta-text mb-0" data-text-lang-key="service-d-cta-text"></p>
-          <a rel="noopener noreferrer" class="service-detail-cta-link">
+        <div class="text-end">
+          <p class="service-detail-cta-text d-inline-block text-break mb-0" style="max-width:100%;"
+            data-text-lang-key="service-d-cta-text">
+          </p>
+          <a class="service-detail-cta-link d-inline-block ms-2" rel="noopener noreferrer">
             <span data-text-lang-key="service-d-cta-link"></span>
           </a>
         </div>
@@ -390,7 +391,6 @@
     <section id="service-details" class="service-details section">
 
       <div class="container">
-
         <div class="row gy-5">
           <!-- 좌측 메뉴 -->
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
@@ -408,7 +408,8 @@
               </div>
             </div><!-- End Services List -->
 
-            <div class="help-box d-flex flex-column justify-content-center align-items-center">
+            <!-- lg보다 클 때 보이는 help box -->
+            <div class="help-box d-none d-lg-flex flex-column justify-content-center align-items-center">
               <i class="bi bi-headset help-icon"></i>
               <h4 data-text-lang-key="help-title">Have a Question?</h4>
               <p class="d-flex align-items-center mt-2 mb-0">
@@ -422,11 +423,27 @@
             </div>
           </div>
 
-          <!-- 우측 콘텐츠 -->
+          <!-- 콘텐츠 -->
           <div class="col-lg-8 ps-lg-5" id="dynamic-content" data-aos="fade-up" data-aos-delay="200"></div>
-        </div>
 
-        <div class="my-5"></div>
+          <!-- lg보다 작을 때 보이는 help box -->
+          <div class="help-box d-flex d-lg-none flex-column justify-content-center align-items-center">
+            <i class="bi bi-headset help-icon"></i>
+            <h4 data-text-lang-key="help-title">Have a Question?</h4>
+            <p class="d-flex align-items-center mt-2 mb-0">
+              <i class="bi bi-telephone me-2"></i>
+              <span data-text-lang-key="help-phone">+1 5589 55488 55</span>
+            </p>
+            <p class="d-flex align-items-center mt-1 mb-0">
+              <i class="bi bi-envelope me-2"></i>
+              <a href="mailto:contact@example.com" data-text-lang-key="help-email">contact@example.com</a>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="my-5"></div>
       </div>
 
     </section>
