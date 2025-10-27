@@ -698,6 +698,8 @@
 
         // template 태그는 렌더링안된 상태로 있어서 렌더링 후에 update
         updateContent();
+        const savedLang = sessionStorage.getItem("lang") || "ko";
+        updateLanguageImages(savedLang);
       }
     }
 
@@ -776,6 +778,16 @@
     });
   }
 
+  function updateLanguageImages(lang) {
+    const attr = lang === "en" ? "data-img-lang-en" : "data-img-lang-ko";
+    document.querySelectorAll('[data-img-lang-ko][data-img-lang-en]').forEach(img => {
+      const targetSrc = img.getAttribute(attr);
+      if (targetSrc) {
+        img.setAttribute("src", targetSrc);
+      }
+    });
+  }
+
   function applyLanguage(lang) {
     if (lang === "ko") {
       document.documentElement.style.setProperty(
@@ -796,6 +808,7 @@
         "'Nunito', sans-serif, 'Noto Sans KR'"
       );
     }
+    updateLanguageImages(lang);
     updateContent();
   }
 
